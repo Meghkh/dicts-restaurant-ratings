@@ -2,22 +2,21 @@
 
 
 # put your code here
-def rating_lister(data_file):
+def print_sorted_ratings(data_file):
     """ Print alphabetically sorted restaurant ratings.
-
     """
 
     scores_list = open(data_file)
-
     ratings_dictionary = {}
 
     for line in scores_list:
-        line = line.rstrip().split(":")
+        # strip, split and unpack into descriptive variables
+        restaurant_name, restaurant_rating = line.rstrip().split(":")
+        # add key and value pairs to ratings dictionary
+        ratings_dictionary[restaurant_name] = restaurant_rating
 
-        ratings_dictionary[line[0]] = line[1]
-
+    # sort dictionary based on keys and print
     for key, value in sorted(ratings_dictionary.items()):
-
         print "{} is rated at {}.".format(key, value)
 
-rating_lister("scores.txt")
+print_sorted_ratings("scores.txt")
