@@ -1,5 +1,17 @@
 """Restaurant rating lister."""
 
+def display_menu():
+    """ Displays options for user interaction and takes input
+
+    """
+
+    print "Please select an option: "
+    print "1 - Display restaurant and ratings"
+    print "2 - Add new restaurant and rating"
+    print "3 - Quit program"
+
+    user_choice = raw_input("-->")
+
 def print_sorted_dictionary(restaurant_dict):
     """ Print formatted dictionary
 
@@ -46,9 +58,13 @@ def run_program():
     """ Runs program for complete restaurant/rating experience
 
     """
+
     new_dict = {}
-    new_dict = read_and_parse_data("scores.txt")
-    new_dict = get_restaurant_from_user(new_dict)
-    print_sorted_dictionary(new_dict)
+
+    while True:
+        user_decision = display_menu
+        new_dict = read_and_parse_data("scores.txt")
+        new_dict = get_restaurant_from_user(new_dict)
+        print_sorted_dictionary(new_dict)
 
 run_program()
