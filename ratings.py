@@ -1,9 +1,31 @@
 """Restaurant rating lister."""
 
+def print_sorted_dictionary(restaurant_dict):
+    """ Print formatted dictionary
 
-# put your code here
-def print_sorted_ratings(data_file):
-    """ Print alphabetically sorted restaurant ratings.
+    """
+    for key, value in sorted(restaurant_dict.items()):
+        print "{} is rated at {}.".format(key, value)
+
+
+def get_restaurant_from_user(restaurant_dict):
+    """ Returns a dictionary with new input from user added.
+
+    """
+
+    input_resturant = raw_input("Please enter new restaurant name: ").title()
+    input_rating = raw_input("Please enter restaurant rating: ")
+
+    while not input_rating.isdigit():
+        input_rating = raw_input("Please enter restaurant rating (from 0 to 10): ")
+
+    restaurant_dict[input_resturant] = input_rating
+
+    return restaurant_dict
+
+
+def read_and_parse_data(data_file):
+    """ Opens file, reads and parses data, and returns a dictionary.
     """
 
     scores_list = open(data_file)
@@ -15,15 +37,18 @@ def print_sorted_ratings(data_file):
         # add key and value pairs to ratings dictionary
         ratings_dictionary[restaurant_name] = restaurant_rating
 
-    input_resturant = raw_input("Please enter new restaurant name: ").title()
-    input_rating = raw_input("Please enter restaurant rating: ")
-    while input_rating.isdigit() is False:
-        input_rating = raw_input("Please enter restaurant rating (from 0 to 10): ")
+    scores_list.close()
 
-    ratings_dictionary[input_resturant] = input_rating
+    return ratings_dictionary
 
-    # sort dictionary based on keys and print
-    for key, value in sorted(ratings_dictionary.items()):
-        print "{} is rated at {}.".format(key, value)
 
-print_sorted_ratings("scores.txt")
+def run_program():
+    """ Runs program for complete restaurant/rating experience
+
+    """
+    new_dict = {}
+    new_dict = read_and_parse_data("scores.txt")
+    new_dict = get_restaurant_from_user(new_dict)
+    print_sorted_dictionary(new_dict)
+
+run_program()
